@@ -14,6 +14,23 @@ The purpose of this tool is to showcase a rendering technique I developed using 
 pip install -r requirements.txt
 ```
 
+### Usage for Custom Font (Chinese for example)
+
+Take Chinese font for example, if you want to display Chinese on a non-APAC garmin device, this project seems to be an excellent fit!
+
+Steps:
+- Make a 1000x1000 pixel RGB png image for each Chinese word you want to use in your project. Use white background, black foreground color.
+- Use the command: (when you have 0.png, 1.png... up to 19.png for example) to create a font of 25-pixel height
+`python3 tilemapper.py -i [0-9].png 1[0-9].png -o $MY_PROJECT_ROOT/resources/fonts/font -r 25`
+- Use the same drawTiles() as in the example, you load the font in your onLayout():
+```
+    var font = WatchUi.loadResource(Rez.Fonts.font_ch);
+    var fontData = WatchUi.loadResource(Rez.JsonData.fontData);
+    var fontWidth = dc.getFontHeight(font);
+```
+- draw the i-th Chinese word (i.png) using
+`drawTiles(dc, fontData[i], font, x, y);`
+
 ### Usage
 
 A full description of all the command line arguments are available with the `--help` flag.
