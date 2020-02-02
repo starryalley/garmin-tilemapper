@@ -304,6 +304,7 @@ def generateFontFile(filename):
 
     global hashTable
     global TILE_SIZE
+    global destinationResolution
 
     hashList = []
 
@@ -312,7 +313,7 @@ def generateFontFile(filename):
 
     sortedHash = sorted(hashList, key=lambda k: k['char'])
 
-    lines = 'info face={0} size={1} bold=0 italic=0 charset=ascii unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0 outline=0\ncommon lineHeight={2} base={3} scaleW=256 scaleH=256 pages=1 packed=0\npage id=0 file="{4}.png"\nchars count={5}\n'.format(Path(filename).name,TILE_SIZE,TILE_SIZE,TILE_SIZE,Path(filename).name,len(sortedHash))
+    lines = 'info face={0} size={1} bold=0 italic=0 charset=ascii unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0 outline=0\ncommon lineHeight={2} base={3} scaleW=256 scaleH=256 pages=1 packed=0\npage id=0 file="{4}.png"\nchars count={5}\n'.format(Path(filename).name,TILE_SIZE,destinationResolution,TILE_SIZE,Path(filename).name,len(sortedHash))
 
     for item in sortedHash:
         lines = lines + 'char id={0} x={1} y={2} width={3} height={4} xoffset=0 yoffset=0 xadvance={5} page=0 chnl=15\n'.format(str(item['char']),str(item['xc']*TILE_SIZE),str(item['yc']*TILE_SIZE),str(TILE_SIZE),str(TILE_SIZE),str(TILE_SIZE))
